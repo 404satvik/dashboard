@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>My Dashboard</h1>
+            <p id="current-date"></p>
+        </header>
+
+        <main class="widget-grid">
+            <div class="card">
+                <div class="card-header">
+                    <i data-feather="clock"></i>
+                    <h3>Current Time</h3>
+                </div>
+                <div class="card-content">
+                    <p id="clock" class="large-text">--:--:-- --</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i data-feather="link"></i>
+                    <h3>Quick Links</h3>
+                </div>
+                <div class="card-content">
+                    <div class="links-container">
+                        <a href="https://github.com" target="_blank" class="link-card">
+                            <i data-feather="github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="link-card">
+                            <i data-feather="youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                        <a href="https://news.google.com" target="_blank" class="link-card">
+                            <i data-feather="globe"></i>
+                            <span>News</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i data-feather="sun"></i>
+                    <h3>Weather</h3>
+                </div>
+                <div class="card-content" id="weather-content">
+                    <p class="large-text">Loading...</p>
+                    <p class="secondary-text">Fetching data</p>
+                </div>
+            </div>
+
+            <div class="card card-large">
+                <div class="card-header">
+                    <i data-feather="check-square"></i>
+                    <h3>To-Do List</h3>
+                </div>
+                <div class="card-content">
+                    <ul id="todo-list" class="todo-list">
+                    </ul>
+                    <form id="todo-form" class="todo-form">
+                        <input type="text" id="todo-input" class="todo-input" placeholder="Add a new task..."
+                            autocomplete="off">
+                        <button type="submit" class="add-btn"><i data-feather="plus"></i></button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+       
+        const clockElement = document.getElementById('clock');
+        const dateElement = document.getElementById('current-date');
+
+        function updateTime() {
+            const now = new Date();
+            clockElement.textContent = now.toLocaleTimeString();
+            dateElement.textContent = now.toLocaleDateString(undefined, {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+      
+        async function updateWeather() {
+            const weatherContent = document.getElementById('weather-content');
+            try {
+                const response = await fetch('/api/weather');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const weather = await response.json();
+                weatherContent.innerHTML = `<p class="large-text">${Math.round(weather.temp)}°C</p><p class="secondary-text">Feels like ${Math.round(weather.feels_like)}°C in ${weather.city}</p><p class="secondary-text">${weather.description}</p>`;
+            } catch (error) {
+                weatherContent.innerHTML = `<p class="secondary-text">Could not load weather data.</p>`;
+            }
+        }
+        setInterval(updateWeather, 1800000);
+
+      
+        const todoForm = document.getElementById('todo-form');
+        const todoInput = document.getElementById('todo-input');
+        const todoList = document.getElementById('todo-list');
+
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+            todoList.innerHTML = '';
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = todo.checked;
+                checkbox.addEventListener('change', () => {
+                    todos[index].checked = checkbox.checked;
+                    saveTodos();
+                });
+
+                const span = document.createElement('span');
+                span.textContent = todo.text;
+
+                label.appendChild(checkbox);
+                label.appendChild(span);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '<i data-feather="trash-2"></i>';
+                deleteBtn.addEventListener('click', () => {
+                    todos.splice(index, 1);
+                    saveTodos();
+                    renderTodos();
+                });
+
+                li.appendChild(label);
+                li.appendChild(deleteBtn);
+                todoList.appendChild(li);
+            });
+            feather.replace();
+        }
+
+        
+        todoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (todos.length >= 10) {
+                alert("You have reached the maximum of 10 tasks.");
+                return; 
+            }
+
+            const newTodoText = todoInput.value.trim();
+
+            if (newTodoText) {
+                todos.push({ text: newTodoText, checked: false });
+                todoInput.value = '';
+                saveTodos();
+                renderTodos();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateWeather();
+            renderTodos();
+            feather.replace();
+        });
+    </script>
+</body>
+
+</html>

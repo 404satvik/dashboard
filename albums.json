@@ -1,0 +1,18 @@
+[
+    {
+        "image": "blond.jpg",
+        "options": ["never enough" , "channel orange", "blond"],
+        "answer": "blond"
+    },
+    {
+        "image": "darkside.jpg",
+        "options": ["The Wall", "Wish You Were Here", "The Dark Side of the Moon"],
+        "answer": "The Dark Side of the Moon"
+    },
+    {
+        "image": "kendrick_lamar_damn.jpg",
+        "options": ["DAMN.", "To Pimp a Butterfly", "Mr. Morale & the Big Steppers"],
+        "answer": "DAMN."
+    }
+
+]
