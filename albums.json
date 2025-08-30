@@ -1,8 +1,8 @@
 [
     {
         "image": "blond.jpg",
-        "options": ["never enough" , "channel orange", "blond"],
-        "answer": "blond"
+        "options": ["never enough" , "channel orange", "blonde"],
+        "answer": "blonde"
     },
     {
         "image": "darkside.jpg",
@@ -13,6 +13,26 @@
         "image": "kendrick_lamar_damn.jpg",
         "options": ["DAMN.", "To Pimp a Butterfly", "Mr. Morale & the Big Steppers"],
         "answer": "DAMN."
+    },
+    {
+        "image": "channel.jpg",
+        "options": ["blond", "channel orange", "endless"],
+        "answer": "channel"
+    },
+    {
+        "image": "graduation.jpg",
+        "options": ["vultures", "yeezus", "graduation"],
+        "answer": "graduation"
+    },
+    {
+        "image": "wlr.jpg",
+        "options": ["iammusic", "dielit", "whole lotta red"],
+        "answer": "whole lotta red"
+    },
+    {
+        "image": "cd.jpg",
+        "options": ["donda", "graduation", "college dropout"],
+        "answer": "college dropout"
     }
 
 ]
