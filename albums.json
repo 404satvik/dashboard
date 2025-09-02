@@ -2,37 +2,49 @@
     {
         "image": "blond.jpg",
         "options": ["never enough" , "channel orange", "blonde"],
-        "answer": "blonde"
+        "answer": "blonde",
+        "spotify_track_id": "3kxfsds8_6w5A8ls6gMRo2"
     },
     {
         "image": "darkside.jpg",
         "options": ["The Wall", "Wish You Were Here", "The Dark Side of the Moon"],
-        "answer": "The Dark Side of the Moon"
+        "answer": "The Dark Side of the Moon",
+        "spotify_track_id": "4OMJG2g248I4N1s2v2x24H"
     },
     {
         "image": "kendrick_lamar_damn.jpg",
         "options": ["DAMN.", "To Pimp a Butterfly", "Mr. Morale & the Big Steppers"],
-        "answer": "DAMN."
+        "answer": "DAMN.",
+        "spotify_track_id": "7iL6o9tox1zgHpKUfhBCeC"
     },
     {
         "image": "channel.jpg",
         "options": ["blond", "channel orange", "endless"],
-        "answer": "channel orange"
+        "answer": "channel orange",
+        "spotify_track_id": "1o2xO0Dk3hpxvBDRaF4m5t"
     },
     {
         "image": "graduation.jpg",
         "options": ["vultures", "yeezus", "graduation"],
-        "answer": "graduation"
+        "answer": "graduation",
+        "spotify_track_id": "3ZffCQKLFLUvYM59XKLbVm"
     },
     {
         "image": "wlr.png",
         "options": ["iammusic", "dielit", "whole lotta red"],
-        "answer": "whole lotta red"
+        "answer": "whole lotta red",
+        "spotify_track_id": "4C2MHiFad1eT2b3J2iAV2A"
     },
     {
         "image": "cd.jpg",
         "options": ["donda", "graduation", "college dropout"],
-        "answer": "college dropout"
+        "answer": "college dropout",
+        "spotify_track_id": "2M2GZwAIcsoNAn3b02i7Q2"
+    },
+    {
+        "image": "grace.jpg",
+        "options": ["grace" , "mojopin" , "ok"],
+        "answer": "grace",
+        "spotify_track_id": "0RYWE4JyuRisvo5oTUeBhY"
     }
-
 ]

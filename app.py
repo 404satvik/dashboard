@@ -5,6 +5,7 @@ import requests
 from dotenv import load_dotenv
 from flask import Flask, render_template, jsonify, request, session
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -29,6 +30,7 @@ def entry_page():
 
 @app.route('/dashboard')
 def dashboard():
+    track_id = session.get('spotify_track_id', '3kxfsds8_6w5A8ls6gMRo2')
     return render_template('dashboard.html')
 
 
@@ -41,7 +43,7 @@ def get_album_puzzle():
     chosen_album = random.choice(valid_albums)
     
     session['correct_answer'] = chosen_album['answer']
-    
+    session['track_id'] = chosen_album['spotify_track_id']
     return jsonify({
         'image': chosen_album['image'],
         'options': random.sample(chosen_album['options'], len(chosen_album['options']))
